@@ -11,7 +11,7 @@ def request_api_data(query_char):
     return res
 
 
-def get_password_leaks_count(hashes, hash_to_check):
+def get_password_leaks_count(hashes, hash_to_check):    # receives matched hash and returns number of times in list
     hashes = (line.split(':') for line in hashes.text.splitlines())
     for h, count in hashes:
         if h == hash_to_check:
@@ -30,7 +30,7 @@ def main(args):
     for password in args:
         count = pwned_api_check(password)
         if count:
-            print(f"{password} was found {count} times... you should probably change your password!")
+            print(f"{len(password) * '*'} was found {count} times... You should probably change your password!")
         else:
             print(f"{len(password) * '*'} was not found! Carry on!")
         return '\nDone!'
